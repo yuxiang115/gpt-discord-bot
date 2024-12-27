@@ -23,18 +23,15 @@ def moderate_message(
 
     category_score_items = model_dump(category_scores)
 
-    blocked_str = ""
+    # Disable blocking by removing 'blocked_str' updates
+    blocked_str = ""  # No blocking will occur
     flagged_str = ""
     for category, score in category_score_items.items():
-        if score > MODERATION_VALUES_FOR_BLOCKED.get(category, 1.0):
-            blocked_str += f"({category}: {score})"
-            logger.info(f"blocked {user} {category} {score}")
-            break
+        # Only handle flagged cases
         if score > MODERATION_VALUES_FOR_FLAGGED.get(category, 1.0):
             flagged_str += f"({category}: {score})"
             logger.info(f"flagged {user} {category} {score}")
     return (flagged_str, blocked_str)
-
 
 async def fetch_moderation_channel(
     guild: Optional[discord.Guild],

@@ -136,20 +136,20 @@ async def process_response(
                     color=discord.Color.yellow(),
                 )
             )
-    elif status is CompletionResult.MODERATION_BLOCKED:
-        await send_moderation_blocked_message(
-            guild=thread.guild,
-            user=user,
-            blocked_str=status_text,
-            message=reply_text,
-        )
-
-        await thread.send(
-            embed=discord.Embed(
-                description=f"❌ **The response has been blocked by moderation.**",
-                color=discord.Color.red(),
-            )
-        )
+    # elif status is CompletionResult.MODERATION_BLOCKED:
+    #     await send_moderation_blocked_message(
+    #         guild=thread.guild,
+    #         user=user,
+    #         blocked_str=status_text,
+    #         message=reply_text,
+    #     )
+    #
+    #     await thread.send(
+    #         embed=discord.Embed(
+    #             description=f"❌ **The response has been blocked by moderation.**",
+    #             color=discord.Color.red(),
+    #         )
+    #     )
     elif status is CompletionResult.TOO_LONG:
         await close_thread(thread)
     elif status is CompletionResult.INVALID_REQUEST:
